@@ -1,0 +1,282 @@
+---
+title: "Pseudopapilledema Research"
+author: "Melvin Disla"
+date: "6/23/2017"
+output: word_document
+---
+## The Data
+```{r}
+pseudopap <- read.csv("/Users/mdisla/Desktop/pseudopapRNFLdataforR_Tam.csv")
+head(pseudopap)
+tail(pseudopap)
+library(psych)
+library(ggplot2)
+```
+
+## Summary of patients average OCT RNFL
+
+Patient 1
+```{r}
+Patient1 <- subset(pseudopap, IID == "1")
+summary(Patient1) #min,mean,max
+sd(Patient1$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 2
+```{r}
+Patient2 <- subset(pseudopap, IID == "4")
+summary(Patient2) #min,mean,max
+sd(Patient2$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 3
+```{r}
+Patient3 <- subset(pseudopap, IID == "7")
+summary(Patient3) #min,mean,max
+sd(Patient3$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 4
+```{r}
+Patient4 <- subset(pseudopap, IID == "14")
+summary(Patient4) #min,mean,max
+sd(Patient4$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 5
+```{r}
+Patient5 <- subset(pseudopap, IID == "20")
+summary(Patient5) #min,mean,max
+sd(Patient5$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 6
+```{r}
+Patient6 <- subset(pseudopap, IID == "23")
+summary(Patient6) #min,mean,max
+sd(Patient6$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 7
+```{r}
+Patient7 <- subset(pseudopap, IID == "30")
+summary(Patient7) #min,mean,max
+sd(Patient7$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 8
+```{r}
+Patient8 <- subset(pseudopap, IID == "34")
+summary(Patient8) #min,mean,max
+sd(Patient8$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 9 
+```{r}
+Patient9 <- subset(pseudopap, IID == "46")
+summary(Patient9) #min,mean,max
+sd(Patient9$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 10
+```{r}
+Patient10 <- subset(pseudopap, IID == "48")
+summary(Patient10) #min,mean,max
+sd(Patient10$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+
+Patient 11
+```{r}
+Patient11 <- subset(pseudopap, IID == "52")
+summary(Patient11) #min,mean,max
+sd(Patient11$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 12
+```{r}
+Patient12 <- subset(pseudopap, IID == "53")
+summary(Patient12) #min,mean,max
+sd(Patient12$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 13
+```{r}
+Patient13 <- subset(pseudopap, IID == "6")
+summary(Patient13) #min,mean,max
+sd(Patient13$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+
+Patient 14
+```{r}
+Patient14 <- subset(pseudopap, IID == "18")
+summary(Patient14) #min,mean,max
+sd(Patient14$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 15
+```{r}
+Patient15 <- subset(pseudopap, IID == "27")
+summary(Patient15) #min,mean,max
+sd(Patient15$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 16
+```{r}
+Patient16 <- subset(pseudopap, IID == "28")
+summary(Patient16) #min,mean,max
+sd(Patient16$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 17
+```{r}
+Patient17 <- subset(pseudopap, IID == "49")
+summary(Patient17) #min,mean,max
+sd(Patient17$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 18
+```{r}
+Patient18 <- subset(pseudopap, IID == "21")
+summary(Patient18) #min,mean,max
+sd(Patient18$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+Patient 19
+```{r}
+Patient19 <- subset(pseudopap, IID == "29")
+summary(Patient19) #min,mean,max
+sd(Patient19$average.RNFL, na.rm = TRUE) #Standard Deviation
+```
+
+## Pseudopapilledema Group vs Papilledema + Pseudopapilledema Group
+
+**Pseudopapiledema Group**
+```{r}
+Pseudopapilledema <- subset(pseudopap, group == "1")
+summary(Pseudopapilledema) #min,mean,max
+sd(Pseudopapilledema$average.RNFL, na.rm = TRUE) #Standard Deviation
+describe(Pseudopapilledema$average.RNFL)
+IQR(Pseudopapilledema$average.RNFL, na.rm = TRUE) #IQR
+```
+
+*Calculating the upper and lower limit of Pseudopapiledema Group*
+```{r}
+SE <- sd(Pseudopapilledema$average.RNFL, na.rm = TRUE) / sqrt(84) #Standard Error
+upper1 <- mean(Pseudopapilledema$average.RNFL, na.rm = TRUE) + 1.96 * SE
+lower1 <- mean(Pseudopapilledema$average.RNFL, na.rm = TRUE) - 1.96 * SE
+c(lower1, upper1) #Upper and Lower limit
+```
+
+## Data Plots
+
+**Histogram**
+```{r}
+hist(Pseudopapilledema$average.RNFL, breaks = 3, main = "Pseudopapiledema Group", xlab = "Average RNFL") 
+```
+The histogram for the Pseudopapilledema group shows a right skew but fairly normal. Let me check via quantile plots.
+
+**Quantile Plot**
+```{r}
+qqnorm(Pseudopapilledema$average.RNFL, main = "Pseudopapiledema Group Normal Q-Q Plot" )
+qqline(Pseudopapilledema$average.RNFL)
+```
+This plot is showing the same right skewness as the histogram. 
+
+
+**Papilledema + Pseudopapilledema Group**
+```{r}
+Papilledema <- subset(pseudopap, group == "2")
+summary(Papilledema) #min,mean,max
+sd(Papilledema$average.RNFL, na.rm = TRUE) #Standard Deviation
+describe(Papilledema$average.RNFL)
+IQR(Papilledema$average.RNFL, na.rm = TRUE) #IQR
+```
+
+*Calculating the upper and lower limit of Pseudopapiledema Group*
+```{r}
+SE <- sd(Papilledema$average.RNFL, na.rm = TRUE) / sqrt(88) #Standard Error
+upper1 <- mean(Papilledema$average.RNFL, na.rm = TRUE) + 1.96 * SE
+lower1 <- mean(Papilledema$average.RNFL, na.rm = TRUE) - 1.96 * SE
+c(lower1, upper1) #Upper and Lower limit
+```
+
+## Data Plots
+
+**Histogram**
+```{r}
+hist(Papilledema$average.RNFL, breaks = 3, main = "Papilledema Group", xlab = "Average RNFL") 
+```
+This histogram for the Papilledema Group shows a unimodal graph with outliers. Let me check via quantile plots.
+
+**Quantile Plot**
+```{r}
+qqnorm(Papilledema$average.RNFL, main = "Papilledema Group Normal Q-Q Plot" )
+qqline(Papilledema$average.RNFL)
+```
+This shows a heavy-tailed plot with two outliers but neither the presence nor absence of the outlier in the graph below would change the regression line.
+
+
+**Boxplot of both groups**
+```{r}
+boxplot(Pseudopapilledema$average.RNFL, Papilledema$average.RNFL)
+```
+1 = Pseudopapilledema Group
+2 = Papilledema Group
+
+## Hypothesis for the Pseudopapiledema group
+Ho:Patients in pseudopapilledema group are not different from papilledema group in RNFL thickness.
+
+Ha:Patients in pseudo group are different from papilledema group in RNFL thickness.
+
+**t-test**
+```{r}
+t.test(Pseudopapilledema$average.RNFL, Papilledema$average.RNFL)
+t.test(Pseudopapilledema$RNFL.I, Papilledema$RNFL.I) #Inferior
+t.test(Pseudopapilledema$RNFL.S, Papilledema$RNFL.S) #Superior
+t.test(Pseudopapilledema$RNFL.N, Papilledema$RNFL.N) #Nasal
+t.test(Pseudopapilledema$RNFL.T, Papilledema$RNFL.T) #Temporal
+```
+
+In a 95% confidence interval we reject the null hypothesis and accept the alternate hypothesis because the p-value = 1.723e-08   for the average RNFL is less than 0.05 but for the Nasal RNFL shows a more promising 95% confidence interval that we reject the null hypothesis and accept the becuase the p-value = 0.03074, which is less than 0.05.
+
+In summary, we reject the null hypothesis with a 95% confidence interval with that we accept the alternate hypothesis of patients in pseudo group are different from papilledema group in RNFL thickness. Due to the p-value being greater than our aplpha number of 0.05, but then we see to truly see if someone has papilledema we should first examine the nasal RNFL and look at their RNFL values to determine the diagnoses.
+
+
+
+
+
+
+
+
+
+```{r}
+correlation <- read.csv("/Users/mdisla/Desktop/correlationdata.csv")
+```
+
+```{r}
+cor(correlation$average.RNFL.p, correlation$avg.RNFL.pp, use = "pairwise.complete.obs") #Correlation between Papilledema and Psuedopapilledema average RNFL
+cor(correlation$RNFL.I.p, correlation$RNFL.I.pp, use = "pairwise.complete.obs") #Correlation between Inferior Papilledema and Psuedopapilledema RNFL
+cor(correlation$RNFL.S.p, correlation$RNFL.S.pp, use = "pairwise.complete.obs") #Correlation between Superior Papilledema and Psuedopapilledema RNFL
+cor(correlation$RNFL.N.p, correlation$RNFL.N.pp, use = "pairwise.complete.obs") #Correlation between Nasal Papilledema and Psuedopapilledema RNFL
+cor(correlation$RNFL.T.p, correlation$RNFL.T.pp,use = "pairwise.complete.obs") #Correlation between Temporal Papilledema and Psuedopapilledema RNFL
+
+```
+In summary, the correlations between the Pseudopapilledema Group vs Papilledema + Pseudopapilledema Group. For the Average RNFL is showing a negligible correlation but going in the positive direction. For the inferior RNFL is showing a weak correlation that is going in a positive direction. For the superior RNFL is showing a negligible correlation that is going in the negative direction. For the nasal RNFL is showing a moderate correlation going in the positive direction. For the temporal RNFL is showing a weak correlation going in the negative direction.
+
+**Linear regression**
+
+```{r}
+regression <- lm(formula = correlation$average.RNFL.p ~ correlation$avg.RNFL.pp, data = correlation)
+summary(regression)
+plot(regression)
+```
+
+*Line regression for nasal RNFL*
+```{r}
+regression2 <- lm(formula = correlation$RNFL.N.p ~ correlation$RNFL.N.pp, data = correlation)
+summary(regression2)
+plot(regression2)
+```
+We see based on plotting the linear regression for the nasal RNFL that the two groups have a better linear correlation compared to the average RNFL.
